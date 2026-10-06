@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b4f71">
+  <meta name="description" content="Eleição Digital Offline-First - projeto acadêmico PWA">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Eleição Digital | Offline-First</title>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">ED</div>
+      <div>
+        <strong>Eleição Digital</strong>
+        <span>Offline-First PWA</span>
+      </div>
+    </div>
+    <div class="status-area">
+      <span id="networkStatus" class="status-pill online">● Online</span>
+      <button id="installBtn" class="btn btn-light hidden">Instalar</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">PROJETO ACADÊMICO</p>
+        <h1>Eleição simulada que continua funcionando sem internet.</h1>
+        <p>Escolha um candidato, confirme seu voto e acompanhe os resultados. Os dados locais são mantidos mesmo quando a conexão cai.</p>
+      </div>
+      <div class="hero-card">
+        <span>Status da aplicação</span>
+        <strong id="appStatus">Pronta para votar</strong>
+        <small id="syncStatus">Nenhum voto pendente.</small>
+      </div>
+    </section>
+
+    <nav class="tabs" aria-label="Navegação principal">
+      <button class="tab active" data-tab="votar">Votar</button>
+      <button class="tab" data-tab="resultados">Resultados</button>
+      <button class="tab" data-tab="notificacoes">Notificações</button>
+      <button class="tab" data-tab="sobre">Sobre</button>
+    </nav>
+
+    <section id="votar" class="tab-panel active">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">ELEIÇÃO 2026</p>
+          <h2>Escolha seu candidato</h2>
+        </div>
+        <span id="voteState" class="badge">1 voto por dispositivo</span>
+      </div>
+
+      <div id="candidateGrid" class="candidate-grid"></div>
+
+      <div id="voteSummary" class="summary-card hidden">
+        <div>
+          <span>Seu voto</span>
+          <strong id="selectedCandidate">-</strong>
+        </div>
+        <button id="confirmVote" class="btn btn-primary">Confirmar voto</button>
+      </div>
+
+      <div id="alreadyVoted" class="notice success hidden">
+        <strong>Voto registrado.</strong>
+        <span>Este dispositivo já realizou o voto nesta simulação.</span>
+      </div>
+    </section>
+
+    <section id="resultados" class="tab-panel">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">APURAÇÃO</p>
+          <h2>Resultados locais</h2>
+        </div>
+        <button id="resetBtn" class="btn btn-danger-outline">Resetar simulação</button>
+      </div>
+      <div id="resultsGrid" class="results-grid"></div>
+      <div class="chart-card">
+        <div class="chart-title"><strong>Distribuição dos votos</strong><span id="totalVotes">0 votos</span></div>
+        <div id="bars"></div>
+      </div>
+    </section>
+
+    <section id="notificacoes" class="tab-panel">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">PUSH + BACKGROUND SYNC</p>
+          <h2>Notificações</h2>
+        </div>
+        <button id="notifyBtn" class="btn btn-primary">Ativar notificações</button>
+      </div>
+      <div class="notice info">
+        <strong>Modo acadêmico</strong>
+        <span>O projeto demonstra a integração de notificações e eventos offline sem depender de um servidor externo de Push.</span>
+      </div>
+      <div id="notificationLog" class="notification-list"></div>
+    </section>
+
+    <section id="sobre" class="tab-panel">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">ARQUITETURA</p>
+          <h2>Como funciona</h2>
+        </div>
+      </div>
+      <div class="architecture-grid">
+        <article><span>01</span><h3>Service Worker</h3><p>Intercepta requisições e entrega os arquivos pelo Cache API quando não existe conexão.</p></article>
+        <article><span>02</span><h3>IndexedDB</h3><p>Guarda candidatos, votos e eventos localmente para que a aplicação continue funcionando offline.</p></article>
+        <article><span>03</span><h3>Background Sync</h3><p>Registra uma tarefa de sincronização quando o usuário vota sem internet.</p></article>
+        <article><span>04</span><h3>Push</h3><p>Demonstra permissão e notificações locais, além de registrar eventos relevantes da eleição.</p></article>
+      </div>
+      <div class="tech-list">
+        <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>PWA</span><span>Service Worker</span><span>Cache API</span><span>IndexedDB</span><span>Background Sync</span><span>Notifications API</span>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status"></div>
+  <script src="js/app.js"></script>
+</body>
+</html>

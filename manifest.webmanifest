@@ -1,0 +1,10 @@
+{
+  "name":"Eleição Digital Offline-First",
+  "short_name":"Eleição Digital",
+  "start_url":"./index.html",
+  "display":"standalone",
+  "background_color":"#f4f7f9",
+  "theme_color":"#0b4f71",
+  "description":"Projeto acadêmico de eleição simulada com recursos offline-first.",
+  "icons":[{"src":"icons/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}
